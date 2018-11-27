@@ -203,19 +203,20 @@ func run() {
 		panic(err)
 	}
 
-	textAtlas := text.NewAtlas(basicfont.Face7x13, text.ASCII)
-
-	best := 0
 	imd := imdraw.New(nil)
 	canvas := pixelgl.NewCanvas(win.Bounds())
+	txt := text.New(bounds.Max.Add(pixel.V(5, -13)), text.NewAtlas(basicfont.Face7x13, text.ASCII))
+
+	best := 0
 	last := time.Now()
 	for !win.Closed() {
 		dt := time.Since(last).Seconds()
 		last = time.Now()
 
 		win.Clear(colornames.Black)
-		canvas.SetBounds(win.Bounds())
 		canvas.Clear(pixel.Alpha(0))
+		txt.Clear()
+		imd.Clear()
 
 		if win.JustPressed(pixelgl.KeyLeft) {
 			game.snake.newDir = left
@@ -240,7 +241,6 @@ func run() {
 		imd.Draw(canvas)
 
 		best = int(math.Max(float64(game.snake.size()), float64(best)))
-		txt := text.New(bounds.Max.Add(pixel.V(5, -13)), textAtlas)
 		drawPoints(txt, "Points", game.snake.size())
 		drawPoints(txt, "Best", best)
 		_, _ = fmt.Fprintln(txt)
