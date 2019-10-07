@@ -115,11 +115,10 @@ func (s *snake) head() pixel.Vec {
 
 func (s *snake) update(dt float64, g *game) {
 	s.lastMove += dt
-	if s.lastMove >= s.speed {
-		s.lastMove = 0
-	} else {
+	if s.lastMove < s.speed {
 		return
 	}
+	s.lastMove = 0
 
 	if s.newDir != s.dir && s.dir.opposite() != s.newDir {
 		s.dir = s.newDir
