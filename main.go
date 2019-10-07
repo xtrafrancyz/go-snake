@@ -179,9 +179,9 @@ func (p point) draw(dt float64, imd *imdraw.IMDraw) {
 }
 
 func drawPoints(text *text.Text, word string, points int) {
-	_, _ = fmt.Fprint(text, word+": ")
+	fmt.Fprint(text, word+": ")
 	text.Color = colornames.Lightgreen
-	_, _ = fmt.Fprintln(text, points)
+	fmt.Fprintln(text, points)
 	text.Color = colornames.White
 }
 
@@ -243,10 +243,10 @@ func run() {
 		best = int(math.Max(float64(game.snake.size()), float64(best)))
 		drawPoints(txt, "Points", game.snake.size())
 		drawPoints(txt, "Best", best)
-		_, _ = fmt.Fprintln(txt)
-		_, _ = fmt.Fprintln(txt, "Controls:")
-		_, _ = fmt.Fprintln(txt, "Arrows")
-		_, _ = fmt.Fprintln(txt, "TAB - Boost")
+		fmt.Fprintln(txt)
+		fmt.Fprintln(txt, "Controls:")
+		fmt.Fprintln(txt, "Arrows")
+		fmt.Fprintln(txt, "TAB - Boost")
 		txt.Draw(win, pixel.IM)
 
 		canvas.Draw(win, pixel.IM.Moved(win.Bounds().Center()))
